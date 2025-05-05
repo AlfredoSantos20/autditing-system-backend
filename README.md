@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# backend-3d-plant
-=======
 # 🌱 3D Plant Backend API (Express.js + TypeScript)
 
 This is the official backend for the **3D Plant Visualization Project**, built with **Express.js** and **TypeScript**. It provides a secure and scalable authentication system using **JWT** and integrates with a database using **Prisma ORM**.
@@ -29,4 +26,3 @@ This is the official backend for the **3D Plant Visualization Project**, built w
 - **Dotenv** for environment configs
 
 
->>>>>>> b75adce (first commit)
