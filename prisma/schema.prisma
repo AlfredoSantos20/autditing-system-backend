@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  password       String
+  username       String
+
+  role           UserRole
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  customer       Customer?
+  admin          Admin?
+}
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  phone     String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Admin {
+  id               Int      @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  address          String
+  phone            String
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  userId           Int      @unique
+  user             User     @relation(fields: [userId], references: [id])
+}
+
+model OTP {
+  email     String @id
+  otp       String
+  expiresAt DateTime
+}
+
+model PlantCategory {
+  id        String  @id @default(uuid())
+  name      String
+  imageUrl  String
+  plants    PlantInfo[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PlantInfo {
+  id               String           @id @default(uuid())
+  name             String
+  scientificName   String
+  genus            String
+  imageUrl         String
+  description      String
+  categoryId       String
+  category         PlantCategory    @relation(fields: [categoryId], references: [id])
+  galleryImages    PlantGallery[]
+ 
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+}
+
+model PlantGallery {
+  id        String @id @default(uuid())
+  imageUrl  String
+  plantId   String
+  plant     PlantInfo  @relation(fields: [plantId], references: [id])
+}
+
+
+
+
