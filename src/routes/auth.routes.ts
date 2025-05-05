@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { registerUser, loginUser } from '../services/auth.services';
 import { authenticateToken } from '../middlewares/auth.middleware';
-import {  getUserAuth,  login,  refreshAccessToken, register } from '../controllers/auth.controllers';
+import {  login,  refreshAccessToken, register } from '../controllers/auth.controllers';
 import { requestOTP, confirmOTP, submitNewPassword} from '../controllers/forgotPassword.controllers';
 
 const router = Router();

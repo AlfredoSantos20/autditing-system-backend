@@ -125,14 +125,6 @@ export const refreshAccessToken = async (req: Request, res: Response) => {
 //   }
 // };
 
-export const getUserAuth = async (req: Request, res: Response) => {
-  try {
-    const response = await userInfo(Number(req.user?.id));
-    
-    res.status(201).json({ message: "UnAuthorized", data: response });
-  } catch (error: any) {
-    res.status(401).json({ message: error.message });
-  }
-};
+
 
 
