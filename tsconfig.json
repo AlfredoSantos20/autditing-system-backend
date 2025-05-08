@@ -20,5 +20,5 @@
     "jsx": "react-jsx"                   
   },
   "include": ["src","types"],                     
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]  // Exclude unnecessary files
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]  
 }

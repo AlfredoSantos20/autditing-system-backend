@@ -2,7 +2,7 @@
 
 This is the official backend for the **3D Plant Visualization Project**, built with **Express.js** and **TypeScript**. It provides a secure and scalable authentication system using **JWT** and integrates with a database using **Prisma ORM**.
 
----
+- Once you clone it just install the nodes
 
 ## 🚀 Features
 
@@ -22,7 +22,7 @@ This is the official backend for the **3D Plant Visualization Project**, built w
 - **TypeScript**
 - **JWT (jsonwebtoken)**
 - **Argon2** (password security)
-- **Prisma + PostgreSQL**
+- **Prisma + Mysql**
 - **Dotenv** for environment configs
 
 

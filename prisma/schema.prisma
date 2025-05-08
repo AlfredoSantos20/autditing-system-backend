@@ -61,7 +61,7 @@ model OTP {
 }
 
 model PlantCategory {
-  id        String  @id @default(uuid())
+  id        Int    @id @default(autoincrement())
   name      String
   imageUrl  String
   plants    PlantInfo[]
@@ -70,13 +70,13 @@ model PlantCategory {
 }
 
 model PlantInfo {
-  id               String           @id @default(uuid())
+  id               Int            @id @default(autoincrement())
   name             String
   scientificName   String
   genus            String
   imageUrl         String
   description      String
-  categoryId       String
+  categoryId       Int
   category         PlantCategory    @relation(fields: [categoryId], references: [id])
   galleryImages    PlantGallery[]
  
@@ -85,9 +85,9 @@ model PlantInfo {
 }
 
 model PlantGallery {
-  id        String @id @default(uuid())
+  id        Int   @id @default(autoincrement())
   imageUrl  String
-  plantId   String
+  plantId   Int
   plant     PlantInfo  @relation(fields: [plantId], references: [id])
 }
 
