@@ -12,6 +12,11 @@ enum UserRole {
   ADMIN
 }
 
+enum Gender {
+  MALE
+  FEMALE
+}
+
 model User {
   id             Int       @id @default(autoincrement())
   email          String    @unique
@@ -20,39 +25,53 @@ model User {
 
   role           UserRole
 
+  personalInfo   PersonalInfo? @relation(fields: [personalInfoId], references: [id])
+  personalInfoId Int?          @unique
+
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+  sentMessages     Chat[]   @relation("SentMessages")
 
-  customer       Customer?
-  admin          Admin?
 }
 
-model Customer {
+model PersonalInfo {
   id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
+  fname     String
+  lname     String
   phone     String
+  gender    Gender
+  address   String
+  birthdate String
+
+  user      User?
+}
+
+// model Customer {
+//   id        Int      @id @default(autoincrement())
+//   firstName String
+//   lastName  String
+//   phone     String
   
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
 
-  userId    Int      @unique
-  user      User     @relation(fields: [userId], references: [id])
-}
+//   userId    Int      @unique
+//   user      User     @relation(fields: [userId], references: [id])
+// }
 
-model Admin {
-  id               Int      @id @default(autoincrement())
-  firstName        String
-  lastName         String
-  address          String
-  phone            String
+// model Admin {
+//   id               Int      @id @default(autoincrement())
+//   firstName        String
+//   lastName         String
+//   address          String
+//   phone            String
 
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+//   createdAt        DateTime @default(now())
+//   updatedAt        DateTime @updatedAt
 
-  userId           Int      @unique
-  user             User     @relation(fields: [userId], references: [id])
-}
+//   userId           Int      @unique
+//   user             User     @relation(fields: [userId], references: [id])
+// }
 
 model OTP {
   email     String @id
@@ -91,6 +110,14 @@ model PlantGallery {
   plant     PlantInfo  @relation(fields: [plantId], references: [id])
 }
 
+model Chat {
+  id          Int      @id @default(autoincrement())
+  request     String
+  response    String?
+  senderId    Int
 
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id])
+  createdAt   DateTime @default(now())
+}
 
 

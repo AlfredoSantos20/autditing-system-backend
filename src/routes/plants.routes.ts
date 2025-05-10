@@ -6,13 +6,13 @@ import { getPlants, getPlant, addPlant, editPlant, removePlant, uploadPlantImage
   
 const router = Router();
 
+const uploadImage = uploadPlantImages.fields([
+  { name: 'image', maxCount: 1 },
+  { name: 'galleryImages', maxCount: 10 }])
 //For Plant Info Routes
 router.get('/get-plants',  authenticateToken, Roles(UserRole.CUSTOMER), getPlants as any);
 router.get('/get-plants/:id',  authenticateToken, Roles(UserRole.CUSTOMER), getPlant as any);
-router.post('/add-plant', uploadPlantImages.fields([
-    { name: 'image', maxCount: 1 },
-    { name: 'galleryImages', maxCount: 10 },
-  ]),  authenticateToken, Roles(UserRole.CUSTOMER), addPlant as any
+router.post('/add-plant', uploadImage,  authenticateToken, Roles(UserRole.CUSTOMER), addPlant as any
 );
 
 router.put( '/edit-plant/:id', uploadPlantImages.fields([{ name: 'image', maxCount: 1 }, ]),  authenticateToken, Roles(UserRole.CUSTOMER), editPlant);
