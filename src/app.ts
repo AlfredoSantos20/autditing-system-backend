@@ -6,6 +6,8 @@ import categoryRoutes from './routes/categories.routes';
 import otp from './routes/otp.routes';
 import plants from './routes/plants.routes';
 import chatsRouter  from './routes/chat.routes';
+import supportRouter  from './routes/support.routes';
+
 
 import cors from 'cors';
 import path from 'path';
@@ -29,5 +31,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/categories/', categoryRoutes);
 app.use('/api/forgot-password/', otp);
 app.use('/api/plants/', plants);
-app.use('/api/chats/', chatsRouter );
+app.use('/api/chats/', chatsRouter);
+app.use('/api/supports/', supportRouter);
 export default app;
