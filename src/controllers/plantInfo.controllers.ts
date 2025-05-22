@@ -14,7 +14,7 @@ import { deleteGalleryImage } from '../services/plantInfo.services';
 
 import prisma from '../config/prisma'; 
 
-// Upload setup
+
 const uploadDir = path.join(__dirname, '..', '..', 'assets', 'images');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });

@@ -32,6 +32,7 @@ model User {
   updatedAt      DateTime  @updatedAt
   sentMessages     Chat[]   @relation("SentMessages")
   supportRequests Support[] 
+  notifications  notif[]  @relation("UserNotifications")
 }
 
 model PersonalInfo {
@@ -45,33 +46,6 @@ model PersonalInfo {
 
   user      User?
 } 
-
-// model Customer {
-//   id        Int      @id @default(autoincrement())
-//   firstName String
-//   lastName  String
-//   phone     String
-  
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   userId    Int      @unique
-//   user      User     @relation(fields: [userId], references: [id])
-// }
-
-// model Admin {
-//   id               Int      @id @default(autoincrement())
-//   firstName        String
-//   lastName         String
-//   address          String
-//   phone            String
-
-//   createdAt        DateTime @default(now())
-//   updatedAt        DateTime @updatedAt
-
-//   userId           Int      @unique
-//   user             User     @relation(fields: [userId], references: [id])
-// }
 
 model OTP {
   email     String @id
@@ -131,5 +105,15 @@ model Support {
   createdAt   DateTime @default(now())
 }
 
+model notif {
+  id          Int @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+
+  user        User     @relation("UserNotifications", fields: [userId], references: [id])
+  userId      Int     
+
+}
 
 

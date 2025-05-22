@@ -1,9 +1,9 @@
 import prisma from '../config/prisma';
 
-export const sendMessage = async (senderId: number, request: string, response?: string) => {
+export const sendMessage = async (senderId: number, request: string, ai_response?: string) => {
   try {
     const chat = await prisma.chat.create({
-      data: { senderId, request, response},
+      data: { senderId, request, ai_response},
     });
     return chat;
   } catch (error) {

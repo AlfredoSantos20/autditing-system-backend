@@ -28,10 +28,25 @@ export const loginUser = async (identifier: string, password: string)  => {
     }
   });
   
-  if (!user || !(await argon2.verify(user.password, password))) {
-    throw new Error('Invalid credentials');
+  
+   let isPasswordValid = false;
+
+  if (user) {
+    isPasswordValid = await argon2.verify(user.password, password);
   }
 
+  if (!user && !isPasswordValid) {
+    throw new Error('Invalid email or username and password!');
+  }
+
+  if (!user) {
+    throw new Error('Incorrect email or username!');
+  }
+
+  if (!isPasswordValid) {
+    throw new Error('Incorrect password1');
+  }
+ 
   return {
     accessToken: generateAccessToken(user.id, user.role),
     refreshToken: generateRefreshToken(user.id)
