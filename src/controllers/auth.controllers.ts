@@ -31,10 +31,17 @@ export const register = async (req: Request, res: Response) => {
     where: { email },
   });
 
+  const existingUsername = await prisma.user.findUnique({
+    where: { username },
+  });
+
   if (existingUser) {
     return res.status(400).json({ message: "Email is already in use" });
   }
   
+   if (existingUsername) {
+    return res.status(400).json({ message: "Username is already in use" });
+  }
 
   if (password !== confirmPassword) {
     return res.status(400).json({ message: "Passwords do not match" });

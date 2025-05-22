@@ -27,7 +27,7 @@ export const sendOTP = async (email: string) => {
   });
 
   await transporter.sendMail({
-    from:`"3D Plant Support" <${process.env.EMAIL_USER}>`,
+    from:`"Plant Support" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: 'Password Reset OTP',
     text: `Your OTP is ${otp}. It expires in ${otpExpiryMinutes} minutes.`,

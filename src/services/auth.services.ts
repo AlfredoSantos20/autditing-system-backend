@@ -44,7 +44,7 @@ export const loginUser = async (identifier: string, password: string)  => {
   }
 
   if (!isPasswordValid) {
-    throw new Error('Incorrect password1');
+    throw new Error('Incorrect password!');
   }
  
   return {
