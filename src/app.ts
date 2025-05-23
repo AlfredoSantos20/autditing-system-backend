@@ -8,6 +8,7 @@ import plants from './routes/plants.routes';
 import chatsRouter  from './routes/chat.routes';
 import supportRouter  from './routes/support.routes';
 import notif  from './routes/notification.routes';
+import historyRoutes  from './routes/history.routes';
 
 import cors from 'cors';
 import path from 'path';
@@ -34,5 +35,7 @@ app.use('/api/plants/', plants);
 app.use('/api/chats/', chatsRouter);
 app.use('/api/supports/', supportRouter);
 app.use('/api/notification/', notif);
+app.use('/api/history/', historyRoutes);
+
 
 export default app;

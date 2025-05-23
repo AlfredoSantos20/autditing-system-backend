@@ -33,6 +33,7 @@ model User {
   sentMessages     Chat[]   @relation("SentMessages")
   supportRequests Support[] 
   notifications  notif[]  @relation("UserNotifications")
+  histories history[]
 }
 
 model PersonalInfo {
@@ -114,6 +115,17 @@ model notif {
   user        User     @relation("UserNotifications", fields: [userId], references: [id])
   userId      Int     
 
+}
+
+model history {
+  id         Int @id @default(autoincrement())
+  plant_id   String
+  plant_name String
+
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+
+  createdAt   DateTime @default(now())
 }
 
 
