@@ -11,20 +11,17 @@ import {
   generateRefreshToken,
   verifyRefreshToken,
 } from "../utils/token";
-import {
-  getCustomerById,
 
-  
-} from "../services/user.services";
 
 export const register = async (req: Request, res: Response) => {
-  const { email, password, confirmPassword, role, username } = req.body;
+  const { email, password, confirmPassword, role, username, name } = req.body;
   console.log("{ email, password, role, username }", {
     email,
     password,
     confirmPassword,
     role,
     username,
+    name,
   });
 
   const existingUser = await prisma.user.findUnique({
@@ -73,7 +70,7 @@ export const register = async (req: Request, res: Response) => {
   }
 
   try {
-    const user = await registerUser(email, password, role, username);
+    const user = await registerUser(email, password, role, username, name);
     res.status(201).json({ message: "User registered", userId: user.id });
   } catch (error: any) {
     res.status(401).json({ message: error.message });

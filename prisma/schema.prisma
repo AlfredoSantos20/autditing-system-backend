@@ -14,30 +14,50 @@ enum UserRole {
 
 
 model User {
-  id             Int       @id @default(autoincrement())
-  email          String    @unique
-  password       String
-  username       String    @unique
-
-  role           UserRole
-  
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
- 
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String?   @unique 
+  password    String?   
+  username    String?   @unique
+  role        UserRole? 
+  createdAt   DateTime? @default(now()) 
+  updatedAt   DateTime? @updatedAt 
 }
 
-model Section{
-   id             Int       @id @default(autoincrement())
-   title          String
-   content       String
-   createdAt      DateTime  @default(now())
-   updatedAt      DateTime  @updatedAt
+model Section {
+  id          Int         @id @default(autoincrement())
+  sectionName String?
+  title       String?
+  createdAt   DateTime?   @default(now())
+  updatedAt   DateTime?   @updatedAt
+  usernames   Username[]  
+}
+
+model Username {
+  id          Int       @id @default(autoincrement())
+  name        String?   
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @updatedAt
+  sectionId   Int?      
+  section     Section?   @relation(fields: [sectionId], references: [id]) 
+  activityLogs ActivityLog[]
 }
 
 model OTP {
   email     String @id
   otp       String
   expiresAt DateTime
+}
+
+
+
+model ActivityLog {
+  id          Int       @id @default(autoincrement())
+  activity    String
+  timestamp   DateTime  @default(now())
+  usernameId  Int       
+  username    Username  @relation(fields: [usernameId], references: [id])
+  archived    Boolean   @default(false) 
 }
 
 
